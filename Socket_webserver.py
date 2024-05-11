@@ -1,16 +1,18 @@
 #import socket module
 from socket import *
-serverSocket = socket(AF_INET, SOCK_STREAM)
+serverSocket = socket(AF_INET, SOCK_STREAM)                         # Membuat Socket
 #Prepare a server socket
-webserver_port_number = 6777
+webserver_port_number = 6777                                        # Membuat Nomor Port
 
-serverSocket.bind(('', webserver_port_number))
-serverSocket.listen(3)
+serverSocket.bind(('', webserver_port_number))                      # Mengaitkan Socket Dengan Nomor Port
+serverSocket.listen(3)                                              # Siap Mendengarkan ketukan pintu dari client (Batas 3)
 
 while True:
     #Establish the connection
     print ('Ready to serve....')
-    connectionSocket, addr = serverSocket.accept()
+    connectionSocket, addr = serverSocket.accept()                  # Pintu Socket dibuka oleh serverSocket, masuk dengan socket baru-
+                                                                    # namanya connectionsocket sebagai client, dan kemudian mereka dapat-
+                                                                    # bertukar bit
     try:
         message = connectionSocket.recv(1024)
         filename = message.split()[1]
