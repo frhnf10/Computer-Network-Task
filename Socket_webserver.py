@@ -9,17 +9,17 @@ serverSocket.listen(3)                                              # Siap Mende
 
 while True:
     #Establish the connection
-    print ('Ready to serve....')
+    print ('Siap Menerima Ketukan....')
     connectionSocket, addr = serverSocket.accept()                  # Pintu Socket dibuka oleh serverSocket, masuk dengan socket baru-
-                                                                    # namanya connectionsocket sebagai client, dan kemudian mereka dapat-
-                                                                    # bertukar bit
+                                                                    # namanya connectionsocket kiriman dari client, dan kemudian mereka-
+                                                                    # dapat bertukar bit
     try:
         message = connectionSocket.recv(1024)
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.read()
         #Send one HTTP header line into socket
-        connectionSocket.send('HTTP/1.1 200 OK \r\n\r\n'.encode()) 
+        connectionSocket.send('HTTP/1.1 200 OK \r\n\r\n'.encode())
         #Send the content of the requested file to the client
         for i in range(0, len(outputdata)):
             connectionSocket.send(outputdata[i].encode())
