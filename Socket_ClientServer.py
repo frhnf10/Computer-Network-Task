@@ -9,3 +9,5 @@ clientsocket.send(sentence.encode())
 modifiedsentence = clientsocket.recv(1024)
 print('From Server: ', modifiedsentence.decode())
 clientsocket.close()
+
+# masih membuat client dan server sederhana
