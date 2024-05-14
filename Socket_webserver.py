@@ -4,7 +4,7 @@ serverSocket = socket(AF_INET, SOCK_STREAM)                         # Membuat So
 #Prepare a server socket
 webserver_port_number = 6777                                        # Membuat Nomor Port
 
-serverSocket.bind(('127.0.0.1', webserver_port_number))                      # Mengaitkan Socket Dengan Nomor Port
+serverSocket.bind(('172.17.48.1', webserver_port_number))                      # Mengaitkan Socket Dengan Nomor Port
 serverSocket.listen(3)                                              # Siap Mendengarkan ketukan pintu dari client (Batas 3)
 
 while True:

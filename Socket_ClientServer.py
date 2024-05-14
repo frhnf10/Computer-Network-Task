@@ -1,5 +1,5 @@
 from socket import *
-servername = '127.0.0.1'
+servername = '172.17.48.1'
 serverport = 6777
 clientsocket = socket(AF_INET, SOCK_STREAM)
 clientsocket.connect((servername,serverport))
@@ -7,9 +7,9 @@ clientsocket.connect((servername,serverport))
 #sentence = input('lowercase input: ')
 #clientsocket.send(sentence.encode())
 
-filename = "/index.html"  # Example filename
-request = f"GET {filename} HTTP/1.1\r\nHost: {servername}\r\n\r\n"
-clientsocket.send(request.encode())
+filename = 'C:/Users/asus/OneDrive - Telkom University/Documents/HTML/index.html'  # Example filename
+#request = f"GET {filename} HTTP/1.1\r\nHost: {servername}\r\n\r\n"
+clientsocket.send(filename.encode())
 
 modifiedsentence = clientsocket.recv(1024)
 print('From Server: ', modifiedsentence.decode())
