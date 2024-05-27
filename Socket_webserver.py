@@ -12,7 +12,7 @@ while True:
     print ('Siap Menerima Ketukan....')
     connectionSocket, addr = serverSocket.accept()                  # Pintu Socket dibuka oleh serverSocket, masuk dengan socket baru-
                                                                     # namanya connectionsocket kiriman dari client, dan kemudian mereka-
-                                                                    # dapat bertukar bit
+                                                                    # dapat bertukar bit bitq
     try:
         message = connectionSocket.recv(1024)
         filename = message.split()[1]
