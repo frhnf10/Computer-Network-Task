@@ -16,3 +16,4 @@ print('From Server: ', modifiedsentence.decode())
 clientsocket.close()
 
 # masih membuat client dan server sederhana
+# merging
