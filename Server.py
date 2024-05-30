@@ -1,35 +1,27 @@
-#import socket module
 from socket import *
-serverSocket = socket(AF_INET, SOCK_STREAM)                         # Membuat Socket
-#Prepare a server socket
+IPv4 = 'localhost'
+Port = 4750
 
-webserver_name = 'localhost'
-webserver_port_number = 4750                                        # Membuat Nomor Port
-serverSocket.bind((webserver_name, webserver_port_number))          # Mengaitkan Socket Dengan Nomor Port
-serverSocket.listen(3)                                              # Siap Mendengarkan ketukan pintu dari client (Batas 3)
+ServerSocket = socket(AF_INET, SOCK_STREAM)
+ServerSocket.bind((IPv4, Port))
+ServerSocket.listen(1)
 
 while True:
-    #Establish the connection
-    print ('Siap Menerima Ketukan....')
-
+    print ('Menunggu koneksi client....')
     # pindah ke client
-    connectionSocket, client_address = serverSocket.accept()                  # Pintu Socket dibuka oleh serverSocket, masuk dengan socket baru-
-    print('Koneksi diterima dari:', client_address)                            # namanya connectionsocket kiriman dari client, dan kemudian mereka-
-                                                                    # dapat bertukar bit
-    try:
-        message = connectionSocket.recv(1024)
-        filename = message.split()[1]
-        f = open(filename[1:])
-        outputdata = f.read()
-        #Send one HTTP header line into socket
-        connectionSocket.send('HTTP/1.1 200 OK \r\n\r\n'.encode())
-        #Send the content of the requested file to the client
-        for i in range(0, len(outputdata)):
-            connectionSocket.send(outputdata[i].encode())
-        connectionSocket.close()
-    except IOError:
-        #Send response message for the file not found
-        connectionSocket.send("HTTP/1.1 200 OK  \r\n\r\n 404 Not Found".encode())
-        #print('404 error: File not found')
-    connectionSocket.close()
-serverSocket.close()
+
+    ConnectionSocket, ClientAddress = ServerSocket.accept()
+    print('Koneksi terhubung dari:', ClientAddress)
+    #pindah ke client
+
+    Data = ConnectionSocket.recv(1024).decode()
+    print('Client meminta perintah:', Data)
+
+    if Data == 'HTTP':
+        ServerResponse = 'GET HTTP OK'
+        ConnectionSocket.send(ServerResponse.encode())
+    else:
+        ServerResponse = 'Error 404'
+        ConnectionSocket.send(ServerResponse.encode())
+    # pindah ke client
+    ConnectionSocket.close()
