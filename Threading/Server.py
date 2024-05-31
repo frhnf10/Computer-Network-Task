@@ -21,17 +21,21 @@ def handle_client(connectionSocket):
 
 def start_server():
     # Prepare a server socket
-    serverSocket = socket(AF_INET, SOCK_STREAM)
+    servername = 'localhost'
     serverPort = 6777
-    serverSocket.bind(('127.0.0.1', serverPort))
+    serverSocket = socket(AF_INET, SOCK_STREAM)
+    serverSocket.bind((servername, serverPort))
     serverSocket.listen(5)
     print('The server is ready to receive')
 
     while True:
         # Establish the connection
         print('Waiting for connection...')
+        # ke client
+
         connectionSocket, addr = serverSocket.accept()
         print('Connection received from', addr)
+        # ke client
 
         # Create a new thread to handle the client
         client_thread = threading.Thread(target=handle_client, args=(connectionSocket,))
