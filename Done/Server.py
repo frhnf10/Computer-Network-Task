@@ -14,14 +14,13 @@ while True:
     print('Koneksi terhubung dari:', ClientAddress)
     #pindah ke client
 
-    Data = ConnectionSocket.recv(1024).decode()
-    print('Client meminta perintah:', Data)
+    Data = ConnectionSocket.recv(4046).decode()
 
     if Data == 'HTTP':
-        ServerResponse = 'GET HTTP OK'
+        ServerResponse = 'HTTP/1.1 200 OK'
         ConnectionSocket.send(ServerResponse.encode())
     else:
-        ServerResponse = 'Error 404'
+        ServerResponse = "HTTP/1.1 200 OK\r\n404 Not Found"
         ConnectionSocket.send(ServerResponse.encode())
     # pindah ke client
     ConnectionSocket.close()
