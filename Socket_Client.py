@@ -11,7 +11,7 @@ request = f"GET {filename} HTTP/1.1\r\nHost: {servername}\r\n\r\n"
 clientsocket.send(request.encode())
 # ke server
 
-modifiedsentence = clientsocket.recv(1024)
+modifiedsentence = clientsocket.recv(4096)
 print('From Server: ', modifiedsentence.decode())
 clientsocket.close()
 

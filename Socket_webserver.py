@@ -17,7 +17,7 @@ while True:
     # ke client
 
     try:
-        message = connectionSocket.recv(1024)
+        message = connectionSocket.recv(4096)
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.read()
