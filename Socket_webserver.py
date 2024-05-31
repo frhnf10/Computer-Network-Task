@@ -1,16 +1,21 @@
 #import socket module
 from socket import *
-serverSocket = socket(AF_INET, SOCK_STREAM)
+IPv4 = 'localhost'
 #Prepare a server socket
 webserver_port_number = 6777
 
-serverSocket.bind(('', webserver_port_number))
-serverSocket.listen(3)
+serverSocket = socket(AF_INET, SOCK_STREAM)
+serverSocket.bind((IPv4, webserver_port_number))
+serverSocket.listen(1)
 
 while True:
     #Establish the connection
     print ('Ready to serve....')
+    # ke client
+
     connectionSocket, addr = serverSocket.accept()
+    # ke client
+
     try:
         message = connectionSocket.recv(1024)
         filename = message.split()[1]
