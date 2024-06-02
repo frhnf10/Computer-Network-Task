@@ -1,18 +1,26 @@
+# Import modul soket
 from socket import *
-servername = 'localhost'
-serverport = 6777
 
-clientsocket = socket(AF_INET, SOCK_STREAM)
-clientsocket.connect((servername,serverport))
-# ke server
+# Membuat variabel nama server dan nomor port tujuan
+serverName = 'localhost'
+serverPort = 4750
 
-filename = "/index.html"  # Example filename
-request = f"GET {filename} HTTP/1.1\r\nHost: {servername}\r\n\r\n"
-clientsocket.send(request.encode())
-# ke server
+# Membangun soket jaringan, AF_INET menyatakan IP versi 4 dan SOCK_STREAM menyatakan jaringan TCP
+clientSocket = socket(AF_INET, SOCK_STREAM)
 
-modifiedsentence = clientsocket.recv(4096)
-print('From Server: ', modifiedsentence.decode())
-clientsocket.close()
+# Melakukan komunikasi ke server
+clientSocket.connect((serverName,serverPort))
+# Menghubungkan ke server
 
-# masih membuat client dan server sederhana
+# Memberikan input client untuk meminta ke server
+fileName = input('Make request to server: ') #Example: /index.html
+request = f'GET {fileName} HTTP/1.1\r\nHost: {serverName}\r\n\r\n'
+
+# Mengirimkan request yang diinginkan client ke server
+clientSocket.send(request.encode())
+# Mengirimkan ke server
+
+# Menerima respon dari server
+response = clientSocket.recv(1024)
+print('Server reponse: ', response.decode())
+clientSocket.close()
